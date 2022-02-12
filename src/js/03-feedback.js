@@ -9,7 +9,7 @@ const refs ={
 const STORAGE_KEY = "feedback-form-state";
 const formData ={};
 refs.form.addEventListener('submit', onSubmitBtn);
-refs.form.addEventListener('input', throttle(onTextInput, 5000));
+refs.form.addEventListener('input', throttle(onTextInput, 1000));
 
  populateText();
 
