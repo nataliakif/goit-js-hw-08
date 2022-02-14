@@ -1,15 +1,14 @@
 
 import throttle from 'lodash.throttle'
 
-const refs ={
-    form: document.querySelector('form'),
-    email: document.querySelector('input'),
-    message: document.querySelector('textarea'),
-}
+const form = document.querySelector('form');
+  
+   
+
 const STORAGE_KEY = "feedback-form-state";
 const formData ={};
-refs.form.addEventListener('submit', onSubmitBtn);
-refs.form.addEventListener('input', throttle(onTextInput, 1000));
+form.addEventListener('submit', onSubmitBtn);
+form.addEventListener('input', throttle(onTextInput, 1000));
 
  populateText();
 
@@ -21,14 +20,15 @@ function onSubmitBtn(e){
 
 }
 function onTextInput(e){
-    formData[e.target.name] = e.target.value;
+    formData.email = form.elements.email.value;
+    formData.message = form.elements.message.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
 }
 
 function populateText(){
    const savedText =localStorage.getItem(STORAGE_KEY);
    if(savedText){
-    refs.email.value = JSON.parse(savedText).email;    
-    refs.message.value = JSON.parse(savedText).message;
+    form.email.value = JSON.parse(savedText).email;    
+    form.message.value = JSON.parse(savedText).message;
     } 
 }
